@@ -27,9 +27,9 @@ namespace Server.Controllers
             var jsondata = Newtonsoft.Json.JsonConvert.DeserializeObject<ClassMentor[]>(datastring);
             
             var result = jsondata
-            .GroupBy(l => (l.Paid? new DateTime(l.PDate.Value.Year,l.PDate.Value.Month,1) : new DateTime(l.Week.Year, l.Week.Month+1, 1)))
+            .GroupBy(l => (l.Paid? new DateTime(l.PDate.Value.Year,l.PDate.Value.Month,1) : new DateTime(l.Week.Year, l.Week.Month, 1).AddMonths(1)))
             .Select(cl => new 
-            {   Month =  (cl.First().Paid? new DateTime(cl.First().PDate.Value.Year,cl.First().PDate.Value.Month,1) : new DateTime(cl.First().Week.Year, cl.First().Week.Month+1, 1)),
+            {   Month =  (cl.First().Paid? new DateTime(cl.First().PDate.Value.Year,cl.First().PDate.Value.Month,1) : new DateTime(cl.First().Week.Year, cl.First().Week.Month, 1).AddMonths(1)),
             Total = cl.Sum(c => c.Total)
             }).ToList();
 

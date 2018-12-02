@@ -26,7 +26,7 @@ namespace Server.Controllers
             var result = jsondata
             .GroupBy(l => (l.Paid? l.PDate.Value: l.Month))
             .Select(cl => new 
-            {   Month =  (cl.First().Paid? cl.First().PDate.Value: new DateTime(cl.First().Month.Year,cl.First().Month.Month+1,1)),
+            {   Month =  (cl.First().Paid? cl.First().PDate.Value: new DateTime(cl.First().Month.Year,cl.First().Month.Month,1).AddMonths(1)),
             Total = cl.Sum(c => c.Total)
             }).ToList();
 
