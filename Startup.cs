@@ -47,14 +47,8 @@ namespace webapi
             services.AddAuthentication("Bearer")
             .AddIdentityServerAuthentication(options =>
             {
-                var _authority = "";
-                 if (HostingEnvironment.IsDevelopment())
-            {
-
-             _authority=   "http://localhost:5000/";
-                } else {
-                  _authority = "http://ec2-35-178-179-78.eu-west-2.compute.amazonaws.com:81/";
-                }
+                var _authority=   "http://localhost:5000/";
+                
                 options.Authority = _authority;
                 options.RequireHttpsMetadata = false;
 
